@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+        <h:head>
+
+        </h:head>
+        <h:body>
+            <div class="card">
+                <h:form>
+                    <div class="ui-fluid formgrid grid">
+                        <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Nombres"/>
+                            <p:inputText id="nombres" value="#{alumnoController.alumno.alumNombres}"/>
+                        </div>
+                        <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Apellidos"/>
+                            <p:inputText id="apellidos" value="#{alumnoController.alumno.alumApellidos}"/>
+                        </div>
+                           <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Fecha de Nacimiento"/>
+                            <p:calendar id="fechaNac" value="#{alumnoController.alumno.alumFechaNacimiento}"/>
+                        </div>
+                        <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Direcion"/>
+                            <p:inputText id="direccion" value="#{alumnoController.alumno.alumDireccion}"/>
+                        </div>
+                        <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Departamento"/>
+                            <p:selectOneMenu id="departamento" value="#{alumnoController.departamentoSel}" 
+                                             converter="#{departamentoConverter}"  >
+                                <f:selectItem itemLabel="Select One" itemValue="#{null}"/>                     
+                                <f:selectItems value="#{alumnoController.departamentos}" var="departamento" 
+                                               itemLabel="#{departamento.deptNombre}" itemValue="#{departamento}" />
+                                <p:ajax listener="#{alumnoController.municipiosPorDepartamento}" update="municipios">
+                                </p:ajax>
+                            </p:selectOneMenu>
+                        </div>
+                            <div class="field col-4 md:col-4">
+                            <p:outputLabel for="@next" value="Municipio"/>
+                            <p:selectOneMenu id="municipios" value="#{alumnoController.alumno.muniId}" >
+                                <f:selectItem itemLabel="Select One" itemValue=""/>
+                                <f:selectItems value="#{alumnoController.municipios}" var="municipio" 
+                                               itemLabel="#{municipio.muniNombre}" itemValue="#{municipio}" />
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+        </h:body>
+
+</html>
